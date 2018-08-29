@@ -1,6 +1,6 @@
-import requests
-from bs4 import BeautifulSoup
-from twitch import TwitchClient
+#import requests
+#from bs4 import BeautifulSoup
+#from twitch import TwitchClient
 import os
 import psutil
 import keyboard

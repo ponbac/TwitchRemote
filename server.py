@@ -22,7 +22,7 @@ def open_stream(twitch_id):
     return "cray shit " + str(twitch_id)
 
 
-# Exit, close all streams
+# Exit, close all streams f
 @app.route('/close/')
 def close_stream ():
     remote.close_stream()
@@ -31,4 +31,4 @@ def close_stream ():
 
 # main
 if __name__ == '__main__':
-    app.run(host=socket.gethostbyname(socket.gethostname())  )
+    app.run(host=socket.gethostbyname(socket.gethostname()))

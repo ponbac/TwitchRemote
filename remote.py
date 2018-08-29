@@ -1,3 +1,4 @@
+import shutil
 from stream import Stream
 import keyboard
 import psutil
@@ -16,7 +17,10 @@ def new_stream(twitch_name):
 
 def open_stream():
     global current_stream
-    subprocess.Popen(['streamlink -p mpv twitch.tv/' + current_stream.name + ' best'], shell=True)
+    print('Going to execute cmd')
+    subprocess.Popen(['cmd', '/c', 'streamlink -p mpv twitch.tv/' + current_stream.name + ' best'])  # Windows
+    #   subprocess.Popen(['streamlink -p mpv twitch.tv/' + current_stream.name + ' best'], shell=True)  # MacOS
+    print('cmd EXECUTED!')
     current_stream.showing = True
     full_screen()
 
