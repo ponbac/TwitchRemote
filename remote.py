@@ -2,32 +2,32 @@ from stream import Stream
 import keyboard
 import psutil
 import subprocess
-import time
 
 MPV_PROCESS = 'mpv.exe'
 
-s1 = Stream('twitchpresents')
-s2 = Stream('tfblade')
+current_stream = Stream('twitchpresents')
 
 
-def open_stream(stream):
-    sbproc = subprocess.Popen(['streamlink -p mpv twitch.tv/' + stream.name + ' best'], shell=True)
-    stream.showing = True
+def new_stream(twitch_name):
+    global current_stream
+    close_stream(current_stream)
+    current_stream = Stream(twitch_name)
 
 
-def close_stream(stream):
+def open_stream():
+    global current_stream
+    subprocess.Popen(['streamlink -p mpv twitch.tv/' + current_stream.name + ' best'], shell=True)
+    current_stream.showing = True
+
+
+def close_stream():
+    global current_stream
     for process in psutil.process_iter():
         # check whether the process name matches
         if process.name() == MPV_PROCESS:
             process.kill()
-            stream.showing = False
+            current_stream.showing = False
 
 
 def full_screen():
     keyboard.write(' f', delay=8)
-
-
-open_stream(s2)
-full_screen()
-time.sleep(15)
-close_stream(s2)

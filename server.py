@@ -1,4 +1,5 @@
 from flask import Flask, render_template, make_response
+import remote
 
 '''---FLASK PART---'''
 app = Flask(__name__)  # create Flask-object
@@ -12,8 +13,11 @@ def index():
 
 
 # Open the inputted twitch stream
-@app.route('/updateStock/<twitch_id>')
-def update_stock(twitch_id):
+@app.route('/open/<twitch_id>')
+def open_stream(twitch_id):
+    remote.close_stream()
+    remote.new_stream(twitch_id)
+    remote.open_stream()
     print('Trying to open ' + twitch_id + ' stream!')
     return "cray shit " + str(twitch_id)
 
