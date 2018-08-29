@@ -28,7 +28,10 @@ def close_stream():
         for process in psutil.process_iter():
             # check whether the process name matches
             if process.name() == MPV_PROCESS or process.name() == MPV_PROCESS[:3]:
-                process.parent().kill()
+                parent = process.parent()
+                for child in parent.children():
+                    child.kill()
+                parent.kill()
                 current_stream.showing = False
                 print('Stream CLOSED!')
     else:

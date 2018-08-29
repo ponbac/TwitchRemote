@@ -1,5 +1,6 @@
 from flask import Flask, render_template, make_response
 import remote
+import socket
 
 '''---FLASK PART---'''
 app = Flask(__name__)  # create Flask-object
@@ -21,6 +22,13 @@ def open_stream(twitch_id):
     return "cray shit " + str(twitch_id)
 
 
+# Exit, close all streams
+@app.route('/close/')
+def close_stream ():
+    remote.close_stream()
+    return 'stopping all cray shit'
+
+
 # main
 if __name__ == '__main__':
-    app.run(host='localhost')
+    app.run(host=socket.gethostbyname(socket.gethostname())  )
