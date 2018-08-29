@@ -2,10 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 from twitch import TwitchClient
 import os
+import psutil
+import keyboard
 
 
 class Stream:
-    #client = TwitchClient(client_id='', oauth_token='')
+    # client = TwitchClient(client_id='', oauth_token='')
 
     def __init__(self, streamer_name):
         #self.page = requests.get('http://www.twitch.tv/' + streamer_name)
@@ -17,9 +19,7 @@ class Stream:
         self.url = 'twitch.tv/' + streamer_name
         self.title = 'title'
         self.viewers = '1337'
-
-    def open(self):
-        os.system('streamlink -p mpv twitch.tv/' + self.name + ' best')
+        self.showing = False
 
     def get_viewers(self):
         return self.viewers
