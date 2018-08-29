@@ -15,7 +15,6 @@ def index():
 # Open the inputted twitch stream
 @app.route('/open/<twitch_id>')
 def open_stream(twitch_id):
-    remote.close_stream()
     remote.new_stream(twitch_id)
     remote.open_stream()
     print('Trying to open ' + twitch_id + ' stream!')
